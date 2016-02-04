@@ -1,29 +1,22 @@
 '''
 - blosum: read blosum files
-- example: blosum("blosum60.txt")
+- example: get_matrix("blosum60.txt")
 '''
 
 import re
 
-def clean_line(line):
+def get_items(line, ext):
+	if ext == 'csv':
+		return line.strip().split(',')
 	return [ i for i in re.split('\s', line.strip()) if i!='' ]
 
-
-def blosum(fn):
+def get_matrix(fn):
 	lines = open(fn).readlines()
 	lines = [ l for l in lines if not l.startswith('#')]
-	
-	if fn.endswith('.csv'):
-		aa = lines.pop(0).strip().split(',')
-	else:
-		aa = clean_line(lines.pop(0))
-
+	aa = get_items(lines.pop(0), fn[-3:])
 	mat = {}
 	for line in lines:
-		if fn.endswith('.csv'):
-			items = line.strip().split(',')
-		else:
-			items = clean_line(line)
+		items = get_items(line, fn[-3:])
 		a = items.pop(0)
 		for i in range(len(items)):
 			mat[(a,aa[i])] = int(items[i])
