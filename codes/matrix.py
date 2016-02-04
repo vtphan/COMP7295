@@ -1,3 +1,7 @@
+'''
+- blosum: read headerless csv-formatted blosum files
+- example: blosum("blosum60.txt")
+'''
 
 def blosum(csv_file):
 	lines = open(csv_file).readlines()
@@ -10,4 +14,4 @@ def blosum(csv_file):
 			mat[(a,aa[i])] = int(items[i])
 	return mat
 
-blosum("blosum62.csv")
+
