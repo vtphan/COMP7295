@@ -24,9 +24,6 @@ class Node(object):
 			print(")", end="")
 
 
-A = Node('A'); B = Node('B'); C = Node('c', A, B); D = Node('D'); root = Node('e', D, C)
-root.Newick()
-
 Distance = {}
 Label = []
 Initialize("phylo_distance.txt", Distance, Label)
