@@ -1,5 +1,3 @@
-Distance = {}
-Label = []
 
 class Node(object):
 	def __init__(self, label, left=None, right=None):
@@ -7,22 +5,26 @@ class Node(object):
 		self.left = left
 		self.right = right
 
-	def print(self):
+	def Newick(self):
 		if self.left is None and self.right is None:
 			print(self.label, end="")
 		else:
 			print("(", end="")
-			self.left.print()
+			self.left.Newick()
 			print(",", end="")
-			self.right.print()
+			self.right.Newick()
 			print(")", end="")
 
-def Initialize(distance_file):
+
+
+def Initialize(distance_file, distance, label):
 	with open(distance_file) as f:
 		for line in f:
 			items = line.strip().split(" ")
-			Label.append(items[0])
-			for i, lab in enumerate(Label):
+			label.append(items[0])
+			for i, lab in enumerate(label):
 				if i<len(Label)-1:
-					Distance[lab,items[0]] = Distance[items[0],lab] = float(items[i+1])
+					distance[lab,items[0]] = distance[items[0],lab] = float(items[i+1])
+
+Initialize("phylo_distance.txt", Distance, Label)
 
